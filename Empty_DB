@@ -19,6 +19,7 @@ CREATE TABLE Consumer (
     Dislikes INTEGER,
     Comments VARCHAR2(100),
     Views INTEGER
+    Duration INTERVAL
 );
 
 CREATE TABLE Channel (
