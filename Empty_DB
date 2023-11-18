@@ -1,0 +1,32 @@
+-- Script to Import Data into an Empty Database.
+
+-- Create Tables
+CREATE TABLE Consumer (
+    ConsumerID (PK, VARCHAR2(10) PRIMARY KEY,
+    ConsumerName (VARCHAR2(50),
+    Age (NUMBER(3),
+    Gender (VARCHAR2(10),
+    Location (VARCHAR2(50),
+    RegistrationID (DATE)
+);
+
+-- CREATE TABLE YTVideo (
+    VideoID CHAR(15) PRIMARY KEY,
+    CategoryID VARCHAR(30),
+    Title VARCHAR2(55),
+    Date DATE,
+    Likes INTEGER,
+    Dislikes INTEGER,
+    Comments VARCHAR2(100),
+    Views INTEGER
+);
+
+CREATE TABLE Channel (
+    ChannelName VARCHAR2(60) PRIMARY KEY,
+    ChannelType VARCHAR2(30),
+    SubscribersCount INTEGER,
+    Videos INTEGER,
+    VideoViews INTEGER,
+    Country CHAR,
+);
+
