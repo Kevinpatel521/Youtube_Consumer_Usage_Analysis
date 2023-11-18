@@ -1,7 +1,8 @@
 -- Milestone 3
--- This document has solutions to 5  out of the 10 Questions which were mentioned in Milestone 2.
+-- This document has solutions to 5 out of the 10 Questions (Q3,6,10,2,8) which were mentioned in Milestone 2.
 
 -- Question 3: Which channel type has the highest average number of video views per video?
+
 WITH ChannelVideoStats AS (
     SELECT
         c.ChannelType,
@@ -66,3 +67,40 @@ SELECT
 FROM
     ChannelStats;
 
+
+-- Question 2: What is the most common age range among consumers who have registered on YouTube in the last six months?
+
+
+SELECT Age, COUNT(*) AS Count
+FROM (
+    SELECT 
+        CASE 
+            WHEN Age BETWEEN 0 AND 18 THEN '0-18'
+            WHEN Age BETWEEN 19 AND 30 THEN '19-30'
+            WHEN Age BETWEEN 31 AND 40 THEN '31-40'
+            WHEN Age BETWEEN 41 AND 50 THEN '41-50'
+            WHEN Age BETWEEN 51 AND 60 THEN '51-60'
+            WHEN Age > 60 THEN '60+'
+            ELSE 'Unknown'
+        END AS Age
+    FROM Consumer
+    WHERE RegistrationID >= ADD_MONTHS(SYSDATE, -6)
+) Age
+GROUP BY Age
+ORDER BY Count DESC;
+
+
+-- Question 8: Which countries/regions contribute the most subscribers for a given channel? 
+
+SELECT 
+    ChannelName,
+    Country,
+    COUNT(ConsumerID) AS SubscribersCount
+FROM 
+    Channel c
+JOIN 
+    Consumer con ON c.ChannelName = con.ConsumerName
+GROUP BY 
+    ChannelName, Country
+ORDER BY 
+    SubscribersCount DESC;
