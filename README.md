@@ -1,6 +1,8 @@
 # Youtube_Consumer_Usage_Analysis
 CNIT 372 Project Fall 2023
 
+Group #7 Member : Kevin Patel, Nisarg Patel, and Yug Vasani.
+
 Group #7 Milestone 1
 Group Names: Kevin Patel, Nisarg Patel, Yug Vasani
 Option Choice: Option A - Usage of YouTube as a Content Consumer
