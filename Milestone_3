@@ -1,0 +1,68 @@
+-- Milestone 3
+-- This document has solutions to 5  out of the 10 Questions which were mentioned in Milestone 2.
+
+-- Question 3: Which channel type has the highest average number of video views per video?
+WITH ChannelVideoStats AS (
+    SELECT
+        c.ChannelType,
+        v.VideoID,
+        v.Views / c.Videos AS ViewsPerVideo
+    FROM
+        Channel c
+        JOIN YTVideo v ON c.ChannelName = v.ChannelName
+)
+SELECT
+    ChannelType,
+    AVG(ViewsPerVideo) AS AvgViewsPerVideo
+FROM
+    ChannelVideoStats
+GROUP BY
+    ChannelType
+ORDER BY
+    AvgViewsPerVideo DESC;
+
+-- Question 6: Which YouTube category has the highest ratio of likes to dislikes on average?
+
+
+WITH LikesDislikesRatio AS (
+    SELECT
+        Category,
+        AVG(Likes) AS AvgLikes,
+        AVG(Dislikes) AS AvgDislikes,
+        CASE
+            WHEN AVG(Dislikes) = 0 THEN NULL
+            ELSE AVG(Likes) / AVG(Dislikes)
+        END AS LikesToDislikesRatio
+    FROM
+        YTVideo
+    GROUP BY
+        Category
+)
+SELECT
+    Category,
+    AVG(LikesToDislikesRatio) AS AvgLikesToDislikesRatio
+FROM
+    LikesDislikesRatio
+GROUP BY
+    Category
+ORDER BY
+    AvgLikesToDislikesRatio DESC;
+
+
+-- Question 10: What is the correlation between the number of subscribers a channel has and the number of views its videos receive on average?
+
+WITH ChannelStats AS (
+    SELECT
+        ChannelName,
+        SubscribersCount,
+        AVG(VideoViews) AS AvgVideoViews
+    FROM
+        Channel
+    GROUP BY
+        ChannelName, SubscribersCount
+)
+SELECT
+    CORR(SubscribersCount, AvgVideoViews) AS Correlation
+FROM
+    ChannelStats;
+
