@@ -1,26 +1,21 @@
 -- Milestone 3
--- This document has solutions to 5 out of the 10 Questions (Q3,6,10,2,8) which were mentioned in Milestone 2.
+-- This document has solutions to 6 out of the 10 Questions (Q3,6,10,2,8,7) mentioned in Milestone 2.
 
--- Question 3: Which channel type has the highest average number of video views per video?
+Question 3: Which channel type has the highest average number of video views per video?
 
-WITH ChannelVideoStats AS (
-    SELECT
-        c.ChannelType,
-        v.VideoID,
-        v.Views / c.Videos AS ViewsPerVideo
-    FROM
-        Channel c
-        JOIN YTVideo v ON c.ChannelName = v.ChannelName
-)
-SELECT
+SELECT 
     ChannelType,
-    AVG(ViewsPerVideo) AS AvgViewsPerVideo
-FROM
-    ChannelVideoStats
-GROUP BY
+    AVG(VideoViews * 1.0 / Videos) AS AvgViewsPerVideo
+FROM 
+    Channel
+WHERE 
+    Videos > 0
+GROUP BY 
     ChannelType
-ORDER BY
-    AvgViewsPerVideo DESC;
+ORDER BY 
+    AvgViewsPerVideo DESC
+LIMIT 1;
+
 
 -- Question 6: Which YouTube category has the highest ratio of likes to dislikes on average?
 
@@ -104,3 +99,9 @@ GROUP BY
     ChannelName, Country
 ORDER BY 
     SubscribersCount DESC;
+
+-- Question 7: What is the average video length that a person watches on YouTube?
+
+SELECT AVG(Duration) AS AvgVideoLength
+FROM YTVIDEO;
+
