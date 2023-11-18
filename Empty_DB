@@ -31,3 +31,29 @@ CREATE TABLE Channel (
     Country CHAR,
 );
 
+
+-- Import data from CSV files into the Video table, 
+-- Note: The import commands and file paths may need to be adjusted based on your specific SQL database system and file locations.
+-- This part will vary depending on your specific SQL database tools and commands.
+
+-- Example 1:
+
+-- Import data into the Consumer table
+COPY Consumer(ConsumerID, ConsumerName, Age, Gender, Location, RegistrationID)
+FROM '/Users/Username/Desktop/Fall2023/CNIT372/Youtube Statistics/videos-stats.csv'
+DELIMITER ','
+CSV HEADER;
+
+-- Example 2:
+
+-- Import data into YTVideo table
+COPY YTVideo(VideoID, CategoryID ,Title,Date,Likes,Dislikes,Comments,Views,Duration)
+FROM '/Users/Username/Desktop/Fall2023/CNIT372/Youtube Statistics/videos-stats.csv'
+DELIMITER ','
+CSV HEADER;
+
+-- Import data into the Channel table
+COPY Channel(ChannelName, ChannelType, SubscribersCount, Videos, VideoViews,Country)
+FROM '/Users/Username/Desktop/Fall2023/CNIT372/Youtube Statistics/comments.csv'
+DELIMITER ','
+CSV HEADER;
