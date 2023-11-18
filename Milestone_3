@@ -1,7 +1,30 @@
 -- Milestone 3
--- This document has solutions to 6 out of the 10 Questions (Q3,6,10,2,8,7) mentioned in Milestone 2.
+-- This document has solutions to 6 out of the 10 Questions (Q2,3,6,7,8,10) mentioned in Milestone 2.
+
+-- Question 2: What is the most common age range among consumers who have registered on YouTube in the last six months?
+
+SELECT Age, COUNT(*) AS Count
+FROM (
+    SELECT 
+        CASE 
+            WHEN Age BETWEEN 0 AND 18 THEN '0-18'
+            WHEN Age BETWEEN 19 AND 30 THEN '19-30'
+            WHEN Age BETWEEN 31 AND 40 THEN '31-40'
+            WHEN Age BETWEEN 41 AND 50 THEN '41-50'
+            WHEN Age BETWEEN 51 AND 60 THEN '51-60'
+            WHEN Age > 60 THEN '60+'
+            ELSE 'Unknown'
+        END AS Age
+    FROM Consumer
+    WHERE RegistrationID >= ADD_MONTHS(SYSDATE, -6)
+) Age
+GROUP BY Age
+ORDER BY Count DESC;
+
 
 Question 3: Which channel type has the highest average number of video views per video?
+
+
 
 SELECT 
     ChannelType,
@@ -45,44 +68,11 @@ ORDER BY
     AvgLikesToDislikesRatio DESC;
 
 
--- Question 10: What is the correlation between the number of subscribers a channel has and the number of views its videos receive on average?
-
-WITH ChannelStats AS (
-    SELECT
-        ChannelName,
-        SubscribersCount,
-        AVG(VideoViews) AS AvgVideoViews
-    FROM
-        Channel
-    GROUP BY
-        ChannelName, SubscribersCount
-)
-SELECT
-    CORR(SubscribersCount, AvgVideoViews) AS Correlation
-FROM
-    ChannelStats;
+-- Question 7: What is the average video length that a person watches on YouTube?
 
 
--- Question 2: What is the most common age range among consumers who have registered on YouTube in the last six months?
-
-
-SELECT Age, COUNT(*) AS Count
-FROM (
-    SELECT 
-        CASE 
-            WHEN Age BETWEEN 0 AND 18 THEN '0-18'
-            WHEN Age BETWEEN 19 AND 30 THEN '19-30'
-            WHEN Age BETWEEN 31 AND 40 THEN '31-40'
-            WHEN Age BETWEEN 41 AND 50 THEN '41-50'
-            WHEN Age BETWEEN 51 AND 60 THEN '51-60'
-            WHEN Age > 60 THEN '60+'
-            ELSE 'Unknown'
-        END AS Age
-    FROM Consumer
-    WHERE RegistrationID >= ADD_MONTHS(SYSDATE, -6)
-) Age
-GROUP BY Age
-ORDER BY Count DESC;
+SELECT AVG(Duration) AS AvgVideoLength
+FROM YTVIDEO;
 
 
 -- Question 8: Which countries/regions contribute the most subscribers for a given channel? 
@@ -100,8 +90,20 @@ GROUP BY
 ORDER BY 
     SubscribersCount DESC;
 
--- Question 7: What is the average video length that a person watches on YouTube?
 
-SELECT AVG(Duration) AS AvgVideoLength
-FROM YTVIDEO;
+-- Question 10: What is the correlation between the number of subscribers a channel has and the number of views its videos receive on average?
 
+WITH ChannelStats AS (
+    SELECT
+        ChannelName,
+        SubscribersCount,
+        AVG(VideoViews) AS AvgVideoViews
+    FROM
+        Channel
+    GROUP BY
+        ChannelName, SubscribersCount
+)
+SELECT
+    CORR(SubscribersCount, AvgVideoViews) AS Correlation
+FROM
+    ChannelStats;
