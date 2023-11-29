@@ -24,20 +24,20 @@ ORDER BY Count DESC;
 
 Question 3: Which channel type has the highest average number of video views per video?
 
+WITH MaxViewPerCategory AS (
+    SELECT
+        categoryid,
+        MAX(view_count) AS max_views
+    FROM
+        YTvideo
+    GROUP BY
+        categoryid
+)
 
-
-SELECT 
-    ChannelType,
-    AVG(VideoViews * 1.0 / Videos) AS AvgViewsPerVideo
-FROM 
-    Channel
-WHERE 
-    Videos > 0
-GROUP BY 
-    ChannelType
-ORDER BY 
-    AvgViewsPerVideo DESC
-LIMIT 1;
+SELECT
+    AVG(max_views) AS avg_highest_views
+FROM
+    MaxViewPerCategory;
 
 
 -- Question 6: Which YouTube category has the highest ratio of likes to dislikes on average?
