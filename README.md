@@ -1,11 +1,13 @@
 # Youtube_Consumer_Usage_Analysis
 CNIT 372 Project Fall 2023
 
-Group #7 Member : Kevin Patel, Nisarg Patel, and Yug Vasani.
+Group #7 Member: Kevin Patel, Nisarg Patel, and Yug Vasani.
 
-Group #7 Milestone 1
-Group Names: Kevin Patel, Nisarg Patel, Yug Vasani
+
 Option Choice: Option A - Usage of YouTube as a Content Consumer
+
+
+
 We plan to use the YouTube Statistics, Most Subscribed Youtube Channels, and Global YouTube Statistics 2023.
 YouTube Statistics: This dataset includes a wide range of YouTube-related statistics, including counts for subscribers, views, likes, dislikes, comments, and other forms of involvement for different channels and videos. Additionally, it might contain details on the types of videos, upload rates, and other things.
 Most Subscribed Youtube Channels: This dataset probably contains statistics on the top YouTube channels with the most subscribers. It might contain information like channel names, subscriber totals, video totals, and category counts.
@@ -21,6 +23,7 @@ Age (NUMBER(3)): Consumer’s Age (Optional)
 Gender (VARCHAR2(10)): Consumer’s Gender (Optional)
 Location (VARCHAR2(50)): Consumer’s Location (Optional)
 RegistrationID (DATE): The date when the user registered on YouTube
+
 
 Table 2: YTVIDEO
 VideoID (PK, CHAR(15)): Unique identifier for Video
